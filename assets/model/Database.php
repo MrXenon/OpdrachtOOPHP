@@ -8,7 +8,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_DATABASE', 'norcom');
+define('DB_DATABASE', 'norcom_2');
 /**
  * Class Database
  * singleton class - zelfde principe als wordpress (kan de database globaal door de gehele website oproepen).

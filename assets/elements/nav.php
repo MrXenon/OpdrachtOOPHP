@@ -43,6 +43,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="account.php?pagename=Mijn%20Account">Account</a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="telefoons.php?pagename=Telefoon">Telefoon</a>
+                </li>
             </ul>
 
         </div> <!-- / .navbar-collapse -->

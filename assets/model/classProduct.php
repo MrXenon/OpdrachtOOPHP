@@ -19,6 +19,10 @@ class classProduct
         private $kosten = "";
         private $prijs = "";
         private $afbeelding = "";
+
+        private $mobielId = "";
+        private $mobiel =  "";
+        private $mobielAfbeelding ="";
     /*
      * --------------------------------------------------------
      * END
@@ -33,13 +37,6 @@ class classProduct
      */
     private function getProductTableName(){
         return $table = 'product';
-    }
-
-    /**
-     * @return string getMobielTableName(mobiele_telefoons)
-     */
-    private function getMobielTableName(){
-        return $table = 'mobiele_telefoons';
     }
 
     /*--------------------------------------------------------
@@ -80,6 +77,11 @@ class classProduct
             'afbeelding'   => array('filter' => FILTER_SANITIZE_STRING ),
             // Id of current row
             'id'    => array( 'filter'    => FILTER_VALIDATE_INT ),
+            // mobiel
+            'mobiel'   => array('filter' => FILTER_SANITIZE_STRING ),
+            // mobiel_img
+            'mobiel_img'   => array('filter' => FILTER_SANITIZE_STRING ),
+
         );
         // fiter de input:
         $inputs = filter_input_array( INPUT_POST, $post_check_array );
@@ -271,6 +273,21 @@ class classProduct
         return $followingdata['nr'];
     }
 
+        /**
+     *
+     * @return int aantal producten in database
+     */
+    public function getNrOfTelefoons(){
+        // Call database = $global wpdb in wordpress
+        $conn = Database::getConnection();
+
+        $query = "SELECT COUNT(*) AS nr FROM `". $this->getMobielTableName()."`";
+        $result = $conn->query( $query );
+        $followingdata = $result->fetch_assoc();
+
+        return $followingdata['nr'];
+    }
+
     /**
      * geeft aan wat update en delete moeten doen.
      */
@@ -424,6 +441,7 @@ class classProduct
             // Set all info
             $mobiel->setMobielId($array['mobiel_id']);
             $mobiel->setMobiel($array['mobiel']);
+            $mobiel->setMobielAfbeelding($array['mobielAfbeelding']);
             
             // Add new object to return array.
             $return_array[] = $mobiel;
@@ -546,6 +564,15 @@ class classProduct
         }
     }
 
+    /**
+     * @param Set $mobiel
+     */
+    public function setMobielAfbeelding($mobielAfbeelding ){
+        if ( is_string( $mobielAfbeelding )){
+            $this->mobielAfbeelding = trim($mobielAfbeelding);
+        }
+    }
+
     /*--------------------------------------------------------
     Mobiel tabel sets END
     */
@@ -639,7 +666,70 @@ class classProduct
     public function getMobiel(){
         return $this->mobiel;
     }
+
+    /**
+     * @return get Mobiel
+     */
+    public function getMobielAfbeelding(){
+        return $this->mobielAfbeelding;
+    }
     /*--------------------------------------------------------
     Product tabel gets END
     */
+
+
+    /**
+     * @return string getMobielTableName(mobiele_telefoons)
+     */
+    private function getMobielTableName(){
+        return $table = 'mobiele_telefoons';
+    }
+
+    /* SAVE START
+     *  1. Try(Insert into) throw(Exception error) catch(Exception error -> Empty (zie 2))
+     *  2. Wanneer empty, toon niks -> weergave = FALSE -> False toont false bericht op register.php
+     *  3. Wanneer succesvol -> Toon True bericht op adminProductAanmaken.php
+     *  4. Zie uitleg hieronder voor meer specifieke informatie.
+     */
+    public function saveMobiel($input_array){
+        try {
+            //Check of gegeven values niet verstuurd zijn -> Throw (mist verplichte velden.)
+            if (!isset($input_array['mobiel']) OR
+                !isset($input_array['mobiel_img'])){
+                // U mist verplichte velden
+                throw new Exception("U mist verplichte velden");
+            }
+            // Check of de gegeven velden een waarde kleiner dan 1 hebben (0) -> Throw (Verplichte velden zijn leeg.)
+            if ( (strlen($input_array['mobiel']) < 1) OR
+                (strlen($input_array['mobiel_img']) < 1)){
+                // Verplichte velden zijn leeg
+                throw new Exception("Verplichte velden zijn leeg") ;
+            }
+
+
+            // Voeg de database connectie toe.
+            $conn = Database::getConnection();
+
+            // Insert query
+            $conn->query("INSERT INTO `". $this->getMobielTableName()."` ( 
+            `mobiel`, `mobielAfbeelding`)".
+                " VALUES ( '".$input_array['mobiel']."', '".$input_array['mobiel_img']."');");
+
+            // Indien een error, roept error gegevens op:
+            if ( !empty($conn->last_error) ){
+                $this->last_error = $conn->last_error;
+                // Helaas, toon error bericht in register.php
+                return FALSE;
+            }
+        } catch (Exception $exc) {
+            // Roep exception melding aan (word hier niet gebruikt)
+            // echo $this->$exc;
+            // return FALSE
+        }
+        // Mooi, toon succes bericht in register.php
+        return TRUE;
+    }
+    /*--------------------------------------------------------
+     * SAVE END
+     */
 }
