@@ -18,15 +18,15 @@
 <hr>
 <h4>How to install</h4>
 <p>
-1. Fork the repository to your htdocs/www folder in your localhost
-2. Create a database.
-3. Insert our norcom.sql in your new database
-4. Add your database credentials to our Database.php file located at (assets/model/Database.php)
-5. Open the project in your localhost
-6. Go to Login, account or PRODUCT AANMAKEN.
-7. Enter the admin credentials: USER:admin  PWD:3dynamisch
-8. You've connected your project succesfully.
-9. Connecting the form requires you to go to (assets/elements/offerte.php) & change our default mail tele4.media-portfolios.nl to your designated e-mail (either from your hosst or the one inserted in your sendmail settings)
+1. Fork the repository to your htdocs/www folder in your localhost<br>
+2. Create a database.<br>
+3. Insert our norcom.sql in your new database<br>
+4. Add your database credentials to our Database.php file located at (assets/model/Database.php)<br>
+5. Open the project in your localhost<br>
+6. Go to Login, account or PRODUCT AANMAKEN.<br>
+7. Enter the admin credentials: USER:admin  PWD:3dynamisch<br>
+8. You've connected your project succesfully.<br>
+9. Connecting the form requires you to go to (assets/elements/offerte.php) & change our default mail tele4.media-portfolios.nl to your designated e-mail (either from your hosst or the one inserted in your sendmail settings)<br>
 </p>
 <hr>
 <h4>Functions</h4>
@@ -42,8 +42,8 @@
 <h4>Author</h4>
 Name: Kevin Schuit <br>
 Company: 3Dynamisch<br>
-Support E-mail: Kevin.schuit@3dynamisch.nl
-Discord: Kebab#7409
+Support E-mail: Kevin.schuit@3dynamisch.nl<br>
+Discord: Kebab#7409<br>
 <hr>
 <h4>Credits</h4>
 <h6>All rights reserved by 3Dynamisch, all files were made by Kevin Schuit</h6>
