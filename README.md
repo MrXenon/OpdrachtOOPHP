@@ -18,15 +18,15 @@
 <hr>
 <h4>How to install</h4>
 <p>
-1. Fork the repository to your htdocs/www folder in your localhost<br>
+1. Fork the repository to your <code>htdocs/www</code> folder in your localhost<br>
 2. Create a database.<br>
 3. Insert our norcom.sql in your new database<br>
-4. Add your database credentials to our Database.php file located at (assets/model/Database.php)<br>
+4. Add your database credentials to our Database.php file located at <code>/assets/model/Database.php</code><br>
 5. Open the project in your localhost<br>
 6. Go to Login, account or PRODUCT AANMAKEN.<br>
-7. Enter the admin credentials: USER:admin  PWD:3dynamisch<br>
+7. Enter the admin credentials: <code>USER:admin</code> <code>PWD:3dynamisch</code><br>
 8. You've connected your project succesfully.<br>
-9. Connecting the form requires you to go to (assets/elements/offerte.php) & change our default mail tele4.media-portfolios.nl to your designated e-mail (either from your hosst or the one inserted in your sendmail settings)<br>
+9. Connecting the form requires you to go to <code>/assets/elements/offerte.php)</code> & change our default mail tele4.media-portfolios.nl to your designated e-mail (either from your hosst or the one inserted in your sendmail settings)<br>
 </p>
 <hr>
 <h4>Functions</h4>
